@@ -29,7 +29,7 @@ def signup(request):
 
     return render(request, 'core/signup.html',
                   {
-                      'form':form
+                    'form':form
                   })
 
 def login(request):
