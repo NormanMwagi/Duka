@@ -36,22 +36,18 @@ def items(request):
 def new(request):
     if request.method == 'POST':
         form = NewItemForm(request.POST, request.FILES)
-
-        if form.is_valid:
+        if form.is_valid():
             item = form.save(commit=False)
             item.created_by = request.user
             item.save()
-
             return redirect('item:detail', pk=item.id)
+    else:
+       form = NewItemForm()
 
-        else:
-           form = NewItemForm()
-
-    return render(request, 'item/form.html',
-                  {
-                      'form': form,
-                      'title':'New Item'
-                  })
+    return render(request, 'item/form.html',{
+        'form': form,
+        'title':'New Item'
+    })
 
 
 @login_required
